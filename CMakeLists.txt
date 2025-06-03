@@ -13,8 +13,17 @@ if(NOT FLUENT_LIBC_RELEASE) # Manually add libraries only if not in release mode
             GIT_TAG        master
     )
 
+    FetchContent_Declare(
+            stdbool
+            GIT_REPOSITORY https://github.com/rodrigoo-r/std_bool
+            GIT_TAG        master
+    )
+
     FetchContent_MakeAvailable(types)
+    FetchContent_MakeAvailable(stdbool)
 
     target_include_directories(linked_queue PRIVATE ${CMAKE_BINARY_DIR}/_deps/types-src)
+    target_include_directories(linked_queue PRIVATE ${CMAKE_BINARY_DIR}/_deps/stdbool-src)
     target_link_libraries(linked_queue PRIVATE types)
+    target_link_libraries(linked_queue PRIVATE stdbool)
 endif ()
