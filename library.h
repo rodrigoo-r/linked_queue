@@ -75,6 +75,10 @@ static inline void linked_queue_next(linked_queue_t **head)
 
     // Move the head pointer to the next node in the queue
     linked_queue_t *next_node = (*head)->next;
+
+    // Relocate the size hint
+    next_node->size = (*head)->size - 1; // Decrement the size hint
+
     free(*head); // Free the current head node
     *head = next_node; // Update head to point to the next node
 }
