@@ -65,6 +65,16 @@ static inline void linked_queue_init(linked_queue_t *head)
     head->size = 0; // Initialize size to 0
 }
 
+/**
+ * @brief Advances the head pointer to the next node in the linked queue.
+ *
+ * This function moves the head pointer to the next node in the queue,
+ * updates the size and tail pointers accordingly, frees the current head node,
+ * and decrements the size hint. If the head pointer or the node it points to is NULL,
+ * the function does nothing.
+ *
+ * @param head Double pointer to the head node of the linked queue.
+ */
 static inline void linked_queue_next(linked_queue_t **head)
 {
     // Guard against NULL pointer
