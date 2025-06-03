@@ -65,4 +65,29 @@ static inline void linked_queue_init(linked_queue_t *head)
     head->size = 0; // Initialize size to 0
 }
 
+static inline void linked_queue_free(linked_queue_t *head)
+{
+    // Guard against NULL pointer
+    if (!head)
+    {
+        return; // Nothing to free
+    }
+
+    // Define a current pointer to iterate through the queue
+    linked_queue_t *current = head;
+
+    // Iterate through the queue until we reach the end
+    while (current)
+    {
+        // Get the next node before freeing the current one
+        linked_queue_t *next_node = current->next; // Store the next node
+
+        // Free the current node
+        free(current);
+
+        // Move to the next node
+        current = next_node;
+    }
+}
+
 #endif //FLUENT_LIBC_LINKED_QUEUE_LIBRARY_H
