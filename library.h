@@ -126,6 +126,7 @@ static inline bool linked_queue_append(linked_queue_t *head, void *data)
     }
 
     linked_queue_init(new_node); // Initialize the new node
+    new_node->data = data; // Set the data pointer to the provided data
 
     // Check if we have a tail node
     if (!head->tail)
