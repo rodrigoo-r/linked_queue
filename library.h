@@ -65,6 +65,20 @@ static inline void linked_queue_init(linked_queue_t *head)
     head->size = 0; // Initialize size to 0
 }
 
+static inline void linked_queue_next(linked_queue_t **head)
+{
+    // Guard against NULL pointer
+    if (!head || !*head)
+    {
+        return; // Nothing to advance
+    }
+
+    // Move the head pointer to the next node in the queue
+    linked_queue_t *next_node = (*head)->next;
+    free(*head); // Free the current head node
+    *head = next_node; // Update head to point to the next node
+}
+
 /**
  * @brief Frees all nodes in a linked queue.
  *
