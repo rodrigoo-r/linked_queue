@@ -12,45 +12,43 @@
 #define FLUENT_LIBC_LINKED_QUEUE_LIBRARY_H
 
 // ============= FLUENT LIB C =============
-// Linked Queue Utility
+// Typed Linked Queue Utility
 // ----------------------------------------
-// Singly linked queue data structure for generic use.
+// Provides a macro to generate a singly-linked queue (FIFO) structure with
+// typed nodes, including utility functions for:
+//   - Initializing a queue
+//   - Appending elements to the tail
+//   - Prepending elements to the head
+//   - Advancing the head to the next node (dequeue-like behavior)
+//   - Freeing the entire queue
 //
-// Provides:
-//   - linked_queue_init(node)           – Initializes a queue node
-//   - linked_queue_next(&head)          – Advances the head node, freeing the previous one
-//   - linked_queue_append(head, data)   – Adds a new node to the tail
-//   - linked_queue_prepend(&head, data) – Inserts a new node at the front
-//   - linked_queue_free(head)           – Frees the entire queue
-//
-// Behavior:
-//   - Each node contains a void* to arbitrary data, a next pointer, and metadata like size/tail
-//   - Append maintains tail and size metadata
-//   - Prepend does not modify tail/size – caller must manage these
-//
-// Memory Management:
-//   - All node allocations use malloc()
-//   - Caller must manually free data stored in each node (if needed)
-//   - linked_queue_free() only frees node structures
-//
-// Dependencies:
-//   - Fluent Lib C: <types.h>, <std_bool.h>
-//   - Standard Lib: <stdlib.h>
+// Usage:
+//   - DEFINE_LINKED_QUEUE(ValueType, name) declares a new typed linked queue.
+//   - All functions are inlined and type-safe thanks to macro expansion.
 //
 // Example:
 // ----------------------------------------
-//   linked_queue_t head;
-//   linked_queue_init(&head);
+//   DEFINE_LINKED_QUEUE(int, int);  // Defines linked_int_queue_t, etc.
 //
-//   linked_queue_append(&head, strdup("Item 1"));
-//   linked_queue_append(&head, strdup("Item 2"));
+//   linked_int_queue_t *queue = malloc(sizeof(linked_int_queue_t));
+//   linked_int_queue_init(queue);
 //
-//   while (head.size > 0) {
-//       printf("Data: %s\n", (char*)head.data);
-//       linked_queue_next(&head);
+//   linked_int_queue_append(queue, 42);
+//   linked_int_queue_append(queue, 1337);
+//
+//   while (queue && queue->size > 0) {
+//       printf("Value: %d\n", queue->data);
+//       linked_int_queue_next(&queue);
 //   }
 //
-//   linked_queue_free(head.next);  // If manually managing head + tail
+//   linked_int_queue_free(queue);
+//
+// Memory Management:
+//   - The caller must `malloc` the initial head node manually.
+//   - Internal nodes are `malloc`'d as needed; `linked_*_queue_free()` reclaims memory.
+//
+// Dependencies:
+//   - `types.h`, `std_bool.h` (from Fluent Lib C), and <stdlib.h>
 //
 
 // ============= INCLUDES =============
