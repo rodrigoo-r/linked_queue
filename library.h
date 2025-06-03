@@ -8,9 +8,9 @@
  * under certain conditions; type show c' for details.
 */
 
-#ifndef LINKED_QUEUE_LIBRARY_H
-#define LINKED_QUEUE_LIBRARY_H
+#ifndef FLUENT_LIBC_LINKED_QUEUE_LIBRARY_H
+#define FLUENT_LIBC_LINKED_QUEUE_LIBRARY_H
 
 void hello(void);
 
-#endif //LINKED_QUEUE_LIBRARY_H
+#endif //FLUENT_LIBC_LINKED_QUEUE_LIBRARY_H
