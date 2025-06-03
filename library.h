@@ -16,8 +16,10 @@
 // ============= INCLUDES =============
 #ifndef FLUENT_LIBC_RELEASE
 #    include <types.h>
+#    include <std_bool.h>
 #else
 #   include <fluent/types/types.h>
+#   include <fluent/std_bool/std_bool.h>
 #endif
 #include <stdlib.h>
 
@@ -96,7 +98,37 @@ static inline void linked_queue_next(linked_queue_t **head)
     *head = next_node; // Update head to point to the next node
 }
 
-/**
+static inline bool linked_queue_append(linked_queue_t *head, void *data)
+{
+    // Guard against NULL pointer
+    if (!head)
+    {
+        return FALSE; // Nothing to append to
+    }
+
+    // If we have a tail, append to the tail's next
+    linked_queue_t *new_node = malloc(sizeof(linked_queue_t));
+    if (!new_node)
+    {
+        return FALSE; // Memory allocation failed
+    }
+
+    linked_queue_init(new_node); // Initialize the new node
+
+    // Check if we have a tail node
+    if (!head->tail)
+    {
+        // If there is no tail, set the head as the tail
+        head->tail = head;
+    }
+
+    head->tail->next = new_node; // Link the new node to the tail
+    head->tail = new_node; // Update the tail pointer
+    head->size++; // Increment the size hint
+    return TRUE; // Successfully appended the new node
+}
+
+/*
  * @brief Frees all nodes in a linked queue.
  *
  * Iterates through the linked queue starting from the given head node,
