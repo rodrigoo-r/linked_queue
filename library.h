@@ -215,6 +215,16 @@ static inline bool linked_queue_prepend(linked_queue_t **head_ptr, void *data)
     linked_queue_init(new_node);
     new_node->data = data; // Set the data pointer to the provided data
 
+    // Move the tail pointer to the new node
+    new_node->tail = head->tail; // Set the tail pointer to the current tail
+
+    // Move the size hint to the new node
+    new_node->size = head->size + 1; // Increment the size hint
+
+    // Set the head's tail to NULL and the size to 0
+    head->tail = NULL; // Clear the tail pointer of the current head
+    head->size = 0; // Reset the size hint of the current head
+
     // Set the head as the next node of the new node
     new_node->next = head; // Link the new node to the current head
 
