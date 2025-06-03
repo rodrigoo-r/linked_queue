@@ -5,7 +5,7 @@ project(linked_queue C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_library(linked_queue STATIC linked_queue.c)
+add_library(linked_queue STATIC linked_queue.c linked_queue.h)
 if(NOT FLUENT_LIBC_RELEASE) # Manually add libraries only if not in release mode
     FetchContent_Declare(
             types
