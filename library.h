@@ -98,6 +98,18 @@ static inline void linked_queue_next(linked_queue_t **head)
     *head = next_node; // Update head to point to the next node
 }
 
+/**
+ * @brief Appends a new node to the end of the linked queue.
+ *
+ * Allocates a new node, initializes it, and appends it to the tail of the queue.
+ * If the queue has no tail, the head is set as the tail. The function updates
+ * the tail pointer and increments the size hint. The data pointer for the new
+ * node is not set in this function; it must be set by the caller if needed.
+ *
+ * @param head Pointer to the head node of the linked queue.
+ * @param data Pointer to the data to be stored in the new node (not set in this function).
+ * @return TRUE if the node was successfully appended, FALSE otherwise.
+ */
 static inline bool linked_queue_append(linked_queue_t *head, void *data)
 {
     // Guard against NULL pointer
