@@ -65,6 +65,16 @@ static inline void linked_queue_init(linked_queue_t *head)
     head->size = 0; // Initialize size to 0
 }
 
+/**
+ * @brief Frees all nodes in a linked queue.
+ *
+ * Iterates through the linked queue starting from the given head node,
+ * freeing each node in the queue. If the head pointer is NULL, the function
+ * does nothing. This function does not free the data pointed to by the
+ * `data` member of each node; it only frees the nodes themselves.
+ *
+ * @param head Pointer to the head node of the linked queue to free.
+ */
 static inline void linked_queue_free(linked_queue_t *head)
 {
     // Guard against NULL pointer
