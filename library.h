@@ -1,0 +1,6 @@
+#ifndef LINKED_QUEUE_LIBRARY_H
+#define LINKED_QUEUE_LIBRARY_H
+
+void hello(void);
+
+#endif //LINKED_QUEUE_LIBRARY_H
