@@ -141,6 +141,18 @@ static inline bool linked_queue_append(linked_queue_t *head, void *data)
     return TRUE; // Successfully appended the new node
 }
 
+/**
+ * @brief Prepends a new node to the beginning of the linked queue.
+ *
+ * Allocates a new node, initializes it, and inserts it at the front of the queue.
+ * The new node becomes the new head of the queue. The data pointer for the new
+ * node is set to the provided data. The function does not update the tail or size
+ * members; these must be managed by the caller if needed.
+ *
+ * @param head_ptr Double pointer to the head node of the linked queue.
+ * @param data Pointer to the data to be stored in the new node.
+ * @return TRUE if the node was successfully prepended, FALSE otherwise.
+ */
 static inline bool linked_queue_prepend(linked_queue_t **head_ptr, void *data)
 {
     // Guard against NULL pointer
