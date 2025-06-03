@@ -141,6 +141,37 @@ static inline bool linked_queue_append(linked_queue_t *head, void *data)
     return TRUE; // Successfully appended the new node
 }
 
+static inline bool linked_queue_prepend(linked_queue_t **head_ptr, void *data)
+{
+    // Guard against NULL pointer
+    if (!head_ptr || !*head_ptr)
+    {
+        return FALSE; // Nothing to prepend to
+    }
+
+    // Allocate a new node
+    linked_queue_t *new_node = malloc(sizeof(linked_queue_t));
+    if (!new_node)
+    {
+        return FALSE; // Memory allocation failed
+    }
+
+    // Get the head
+    linked_queue_t *head = *head_ptr;
+
+    // Initialize the new node
+    linked_queue_init(new_node);
+    new_node->data = data; // Set the data pointer to the provided data
+
+    // Set the head as the next node of the new node
+    new_node->next = head; // Link the new node to the current head
+
+    // Update the head pointer to point to the new node
+    *head_ptr = new_node; // Update head to point to the new node
+
+    return TRUE; // Successfully prepended the new node
+}
+
 /*
  * @brief Frees all nodes in a linked queue.
  *
